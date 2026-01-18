@@ -249,10 +249,10 @@
             <select class="filter-select" id="departmentFilter">
                 <option value="">جميع الأقسام</option>
                 <option value="الإدارة">الإدارة</option>
-                <option value="التقنية">التقنية</option>
-                <option value="المالية">المالية</option>
-                <option value="المبيعات">المبيعات</option>
-                <option value="الدعم الفني">الدعم الفني</option>
+                <option value="السكرتارية">السكرتارية</option>
+                <option value="شعبة تخطيط الطيف الترددي"> شعبة تخطيط الطيف الترددي</option>
+                <option value="شعبة عمليات الطيف الترددي">شعبة عمليات الطيف الترددي</option>
+                <option value="شعبة مكتب التواصل لشؤون الطيف الترددي">شعبة مكتب التواصل لشؤون الطيف الترددي</option>
             </select>
             
             <button class="btn btn-secondary" id="resetFilters">
@@ -402,10 +402,10 @@
                                         <select id="employeeDepartment" class="form-control" required>
                                             <option value="">اختر القسم...</option>
                                             <option value="الإدارة">الإدارة</option>
-                                            <option value="التقنية">التقنية</option>
-                                            <option value="المالية">المالية</option>
-                                            <option value="المبيعات">المبيعات</option>
-                                            <option value="الدعم الفني">الدعم الفني</option>
+                                            <option value="السكرتارية">السكرتارية</option>
+                                            <option value="شعبة تخطيط الطيف الترددي">شعبة تخطيط الطيف الترددي</option>
+                                            <option value="شعبة عمليات الطيف الترددي">شعبة عمليات الطيف الترددي</option>
+                                            <option value="شعبة مكتب التواصل لشؤون الطيف الترددي">شعبة مكتب التواصل لشؤون الطيف الترددي</option>
                                         </select>
                                     </div>
                                 </div>
@@ -528,10 +528,10 @@
                                         <label for="editEmployeeDepartment">القسم *</label>
                                         <select id="editEmployeeDepartment" class="form-control" required>
                                             <option value="الإدارة" ${employee.department === 'الإدارة' ? 'selected' : ''}>الإدارة</option>
-                                            <option value="التقنية" ${employee.department === 'التقنية' ? 'selected' : ''}>التقنية</option>
-                                            <option value="المالية" ${employee.department === 'المالية' ? 'selected' : ''}>المالية</option>
-                                            <option value="المبيعات" ${employee.department === 'المبيعات' ? 'selected' : ''}>المبيعات</option>
-                                            <option value="الدعم الفني" ${employee.department === 'الدعم الفني' ? 'selected' : ''}>الدعم الفني</option>
+                                            <option value="سكرتارية" ${employee.department === 'سكرتارية' ? 'selected' : ''}>سكرتارية</option>
+                                            <option value="شعبة تخطيط الطيف الترددي" ${employee.department === 'شعبة تخطيط الطيف الترددي' ? 'selected' : ''}>شعبة تخطيط الطيف الترددي</option>
+                                            <option value="شعبة عمليات الطيف الترددي" ${employee.department === 'شعبة عمليات الطيف الترددي' ? 'selected' : ''}>شعبة عمليات الطيف الترددي</option>
+                                            <option value="شعبة مكتب التواصل لشؤون الطيف الترددي" ${employee.department === 'شعبة مكتب التواصل لشؤون الطيف الترددي' ? 'selected' : ''}>شعبة مكتب التواصل لشؤون الطيف الترددي</option>
                                         </select>
                                     </div>
                                 </div>
@@ -794,3 +794,4 @@
     </script>
 </body>
 </html>
+
