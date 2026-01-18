@@ -1,1 +1,738 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأجندة - مكتب إدارة الطيف الترددي</title>
+    <base target="_self">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <style>
+        .calendar-page {
+            min-height: 100vh;
+            background: #f5f7fa;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .page-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .page-title {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        
+        .calendar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 2rem;
+        }
+        
+        .calendar-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .calendar-view-buttons {
+            display: flex;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+        
+        .calendar-view-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .calendar-view-btn.active {
+            background: #1a237e;
+            color: white;
+        }
+        
+        #calendar {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .fc-event {
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.2rem;
+        }
+        
+        .fc-event-primary {
+            background-color: #1a237e;
+            border-color: #1a237e;
+        }
+        
+        .fc-event-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        
+        .fc-event-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #212529;
+        }
+        
+        .fc-event-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        
+        .fc-event-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+        
+        .back-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .sync-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+        
+        .sync-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            background: white;
+            color: #333;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .sync-btn.outlook {
+            background: #0072C6;
+            color: white;
+        }
+        
+        .sync-btn.gmail {
+            background: #D44638;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .calendar-actions {
+                flex-direction: column;
+            }
+            
+            .sync-buttons {
+                margin-left: 0;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body class="calendar-page">
+    <!-- رأس الصفحة -->
+    <header class="page-header">
+        <div class="page-header-content">
+            <div>
+                <h1 class="page-title"><i class="fas fa-calendar-alt"></i> الأجندة</h1>
+                <p>إدارة الأحداث والمواعيد والمهام</p>
+            </div>
+            <div class="page-actions">
+                <a href="dashboard.html" class="back-btn">
+                    <i class="fas fa-arrow-right"></i> العودة
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="calendar-container">
+        <!-- شريط الأدوات -->
+        <div class="calendar-actions">
+            <div class="calendar-view-buttons">
+                <button class="calendar-view-btn active" id="dayView">يوم</button>
+                <button class="calendar-view-btn" id="weekView">أسبوع</button>
+                <button class="calendar-view-btn" id="monthView">شهر</button>
+                <button class="calendar-view-btn" id="listView">قائمة</button>
+            </div>
+            
+            <button class="btn btn-primary" id="addEventBtn">
+                <i class="fas fa-plus"></i> إضافة حدث
+            </button>
+            
+            <div class="sync-buttons">
+                <a href="#" class="sync-btn outlook" id="syncOutlook">
+                    <i class="fab fa-microsoft"></i> مزامنة هوتميل
+                </a>
+                <a href="#" class="sync-btn gmail" id="syncGmail">
+                    <i class="fab fa-google"></i> مزامنة جيميل
+                </a>
+            </div>
+        </div>
+
+        <!-- التقويم -->
+        <div id="calendar"></div>
+    </div>
+
+    <!-- مكتبة FullCalendar -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/ar.min.js"></script>
+    
+    <script src="app.js"></script>
+    <script>
+        // تهيئة التقويم
+        let calendar;
+        let currentView = 'dayGridMonth';
+        
+        function initializeCalendar() {
+            const calendarEl = document.getElementById('calendar');
+            
+            // تحميل الأحداث من localStorage
+            const events = JSON.parse(localStorage.getItem('calendarEvents')) || [];
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            
+            // تحويل المهام إلى أحداث تقويم
+            const taskEvents = tasks.map(task => ({
+                id: 'task-' + task.id,
+                title: task.title,
+                start: task.dueDate,
+                end: task.dueDate,
+                color: getEventColor(task.priority),
+                extendedProps: {
+                    type: 'task',
+                    taskId: task.id
+                }
+            }));
+            
+            // دمج الأحداث والمهام
+            const allEvents = [...events, ...taskEvents];
+            
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                locale: 'ar',
+                direction: 'rtl',
+                initialView: currentView,
+                headerToolbar: {
+                    right: 'prev,next today',
+                    center: 'title',
+                    left: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
+                buttonText: {
+                    today: 'اليوم',
+                    month: 'شهر',
+                    week: 'أسبوع',
+                    day: 'يوم',
+                    list: 'قائمة'
+                },
+                events: allEvents,
+                eventClick: function(info) {
+                    showEventDetails(info.event);
+                },
+                eventContent: function(arg) {
+                    const typeIcon = arg.event.extendedProps.type === 'task' ? 
+                        '<i class="fas fa-tasks" style="margin-left: 5px;"></i>' : 
+                        '<i class="fas fa-calendar-check" style="margin-left: 5px;"></i>';
+                    
+                    return {
+                        html: `<div style="display: flex; align-items: center;">${arg.event.title}${typeIcon}</div>`
+                    };
+                }
+            });
+            
+            calendar.render();
+            
+            // تحديث حجم التقويم عند تغيير حجم النافذة
+            window.addEventListener('resize', function() {
+                calendar.updateSize();
+            });
+        }
+        
+        // الحصول على لون الحدث بناءً على الأولوية
+        function getEventColor(priority) {
+            switch(priority) {
+                case 'عالي': return '#dc3545';
+                case 'متوسط': return '#ffc107';
+                case 'منخفض': return '#28a745';
+                default: return '#1a237e';
+            }
+        }
+        
+        // عرض تفاصيل الحدث
+        function showEventDetails(event) {
+            const isTask = event.extendedProps.type === 'task';
+            const modalHTML = `
+                <div class="modal-overlay" id="eventDetailsModal">
+                    <div class="modal">
+                        <div class="modal-header">
+                            <h3><i class="fas ${isTask ? 'fa-tasks' : 'fa-calendar-check'}"></i> ${event.title}</h3>
+                            <button class="close-modal" onclick="closeModal()">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="event-details">
+                                <div class="detail-item">
+                                    <label>النوع:</label>
+                                    <span>${isTask ? 'مهمة' : 'حدث'}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <label>التاريخ:</label>
+                                    <span>${formatDate(event.start)}</span>
+                                </div>
+                                ${event.end ? `
+                                <div class="detail-item">
+                                    <label>تاريخ الانتهاء:</label>
+                                    <span>${formatDate(event.end)}</span>
+                                </div>
+                                ` : ''}
+                                ${event.extendedProps.description ? `
+                                <div class="detail-item">
+                                    <label>الوصف:</label>
+                                    <p>${event.extendedProps.description}</p>
+                                </div>
+                                ` : ''}
+                                ${isTask ? `
+                                <div class="detail-item">
+                                    <label>حالة المهمة:</label>
+                                    <span id="taskStatusText">${getTaskStatus(event.extendedProps.taskId)}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <label>تغيير الحالة:</label>
+                                    <select id="updateTaskStatus" class="form-control">
+                                        <option value="معلق">معلق</option>
+                                        <option value="قيد التنفيذ">قيد التنفيذ</option>
+                                        <option value="مكتمل">مكتمل</option>
+                                    </select>
+                                </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            ${isTask ? `
+                            <button class="btn btn-primary" onclick="updateTaskStatus(${event.extendedProps.taskId})">
+                                <i class="fas fa-save"></i> حفظ الحالة
+                            </button>
+                            <a href="tasks.html?id=${event.extendedProps.taskId}" class="btn btn-secondary">
+                                <i class="fas fa-external-link-alt"></i> الانتقال للمهمة
+                            </a>
+                            ` : ''}
+                            <button class="btn btn-danger" onclick="deleteEvent('${event.id}', ${isTask})">
+                                <i class="fas fa-trash"></i> ${isTask ? 'حذف المهمة' : 'حذف الحدث'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            
+            // تعيين الحالة الحالية للمهمة إذا كانت مهمة
+            if (isTask) {
+                const taskStatus = getTaskStatus(event.extendedProps.taskId);
+                document.getElementById('updateTaskStatus').value = taskStatus;
+            }
+        }
+        
+        // الحصول على حالة المهمة
+        function getTaskStatus(taskId) {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            const task = tasks.find(t => t.id === taskId);
+            return task ? task.status : 'غير معروف';
+        }
+        
+        // تحديث حالة المهمة
+        function updateTaskStatus(taskId) {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            const taskIndex = tasks.findIndex(t => t.id === taskId);
+            
+            if (taskIndex !== -1) {
+                tasks[taskIndex].status = document.getElementById('updateTaskStatus').value;
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                
+                // تحديث التقويم
+                calendar.refetchEvents();
+                document.getElementById('taskStatusText').textContent = tasks[taskIndex].status;
+                alert('تم تحديث حالة المهمة بنجاح');
+            }
+        }
+        
+        // حذف الحدث
+        function deleteEvent(eventId, isTask) {
+            if (!confirm(`هل أنت متأكد من حذف ${isTask ? 'المهمة' : 'الحدث'}؟`)) {
+                return;
+            }
+            
+            if (isTask) {
+                // حذف المهمة
+                const taskId = parseInt(eventId.replace('task-', ''));
+                const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+                const updatedTasks = tasks.filter(t => t.id !== taskId);
+                localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+            } else {
+                // حذف الحدث
+                const events = JSON.parse(localStorage.getItem('calendarEvents')) || [];
+                const updatedEvents = events.filter(e => e.id !== eventId);
+                localStorage.setItem('calendarEvents', JSON.stringify(updatedEvents));
+            }
+            
+            // إغلاق المودال وتحديث التقويم
+            closeModal();
+            calendar.refetchEvents();
+            alert(`تم حذف ${isTask ? 'المهمة' : 'الحدث'} بنجاح`);
+        }
+        
+        // إضافة حدث جديد
+        function showAddEventModal() {
+            const modalHTML = `
+                <div class="modal-overlay" id="addEventModal">
+                    <div class="modal">
+                        <div class="modal-header">
+                            <h3><i class="fas fa-calendar-plus"></i> إضافة حدث جديد</h3>
+                            <button class="close-modal" onclick="closeModal()">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="newEventForm">
+                                <div class="form-group">
+                                    <label for="eventTitle">عنوان الحدث *</label>
+                                    <input type="text" id="eventTitle" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="eventDescription">وصف الحدث</label>
+                                    <textarea id="eventDescription" class="form-control" rows="3"></textarea>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="eventStartDate">تاريخ البدء *</label>
+                                        <input type="datetime-local" id="eventStartDate" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="eventEndDate">تاريخ الانتهاء</label>
+                                        <input type="datetime-local" id="eventEndDate" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="eventColor">لون الحدث</label>
+                                    <select id="eventColor" class="form-control">
+                                        <option value="#1a237e">أزرق</option>
+                                        <option value="#28a745">أخضر</option>
+                                        <option value="#ffc107">أصفر</option>
+                                        <option value="#dc3545">أحمر</option>
+                                        <option value="#17a2b8">تركواز</option>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" onclick="closeModal()">إلغاء</button>
+                                    <button type="submit" class="btn btn-primary">إضافة الحدث</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            
+            // تعيين التاريخ والوقت الحاليين كقيم افتراضية
+            const now = new Date();
+            const startDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+            document.getElementById('eventStartDate').value = startDate;
+            
+            // إضافة مستمعي الأحداث للمودال
+            const form = document.getElementById('newEventForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                addNewEvent();
+            });
+        }
+        
+        // إضافة حدث جديد
+        function addNewEvent() {
+            const events = JSON.parse(localStorage.getItem('calendarEvents')) || [];
+            
+            const newEvent = {
+                id: 'event-' + Date.now(),
+                title: document.getElementById('eventTitle').value,
+                description: document.getElementById('eventDescription').value,
+                start: document.getElementById('eventStartDate').value,
+                end: document.getElementById('eventEndDate').value || document.getElementById('eventStartDate').value,
+                color: document.getElementById('eventColor').value,
+                extendedProps: {
+                    type: 'event'
+                }
+            };
+            
+            events.push(newEvent);
+            localStorage.setItem('calendarEvents', JSON.stringify(events));
+            
+            // إغلاق المودال وتحديث التقويم
+            closeModal();
+            calendar.refetchEvents();
+            alert('تم إضافة الحدث بنجاح');
+        }
+        
+        // تغيير عرض التقويم
+        function changeCalendarView(view) {
+            currentView = view;
+            calendar.changeView(view);
+            
+            // تحديث أزرار العرض النشط
+            document.querySelectorAll('.calendar-view-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            if (view === 'timeGridDay') {
+                document.getElementById('dayView').classList.add('active');
+            } else if (view === 'timeGridWeek') {
+                document.getElementById('weekView').classList.add('active');
+            } else if (view === 'dayGridMonth') {
+                document.getElementById('monthView').classList.add('active');
+            } else if (view === 'listWeek') {
+                document.getElementById('listView').classList.add('active');
+            }
+        }
+        
+        // تنسيق التاريخ
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('ar-SA', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+        
+        // مزامنة مع هوتميل
+        function syncWithOutlook() {
+            // في الواقع، هذا يتطلب تفعيل Outlook API
+            // هنا سنقوم بمحاكاة العملية فقط
+            
+            if (confirm('هل تريد مزامنة الأحداث مع حساب هوتميل الخاص بك؟')) {
+                // محاكاة عملية المزامنة
+                setTimeout(() => {
+                    alert('تمت مزامنة الأحداث مع هوتميل بنجاح');
+                }, 2000);
+            }
+        }
+        
+        // مزامنة مع جيميل
+        function syncWithGmail() {
+            // في الواقع، هذا يتطلب تفعيل Google Calendar API
+            // هنا سنقوم بمحاكاة العملية فقط
+            
+            if (confirm('هل تريد مزامنة الأحداث مع حساب جيميل الخاص بك؟')) {
+                // محاكاة عملية المزامنة
+                setTimeout(() => {
+                    alert('تمت مزامنة الأحداث مع جيميل بنجاح');
+                }, 2000);
+            }
+        }
+        
+        // إغلاق المودال
+        function closeModal() {
+            const modal = document.querySelector('.modal-overlay');
+            if (modal) {
+                modal.remove();
+            }
+        }
+        
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // التحقق من تسجيل الدخول
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // تهيئة التقويم
+            initializeCalendar();
+            
+            // إضافة مستمعي الأحداث
+            document.getElementById('dayView').addEventListener('click', () => changeCalendarView('timeGridDay'));
+            document.getElementById('weekView').addEventListener('click', () => changeCalendarView('timeGridWeek'));
+            document.getElementById('monthView').addEventListener('click', () => changeCalendarView('dayGridMonth'));
+            document.getElementById('listView').addEventListener('click', () => changeCalendarView('listWeek'));
+            document.getElementById('addEventBtn').addEventListener('click', showAddEventModal);
+            document.getElementById('syncOutlook').addEventListener('click', syncWithOutlook);
+            document.getElementById('syncGmail').addEventListener('click', syncWithGmail);
+            
+            // إغلاق المودال عند النقر خارجها
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal-overlay')) {
+                    closeModal();
+                }
+            });
+        });
+        
+        // إضافة أنماط المودال
+        const modalStyles = document.createElement('style');
+        modalStyles.textContent = `
+            .modal-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+                padding: 20px;
+            }
+            
+            .modal {
+                background: white;
+                border-radius: 10px;
+                width: 100%;
+                max-width: 500px;
+                max-height: 90vh;
+                overflow-y: auto;
+                animation: modalFadeIn 0.3s ease;
+            }
+            
+            @keyframes modalFadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .modal-header {
+                padding: 1.5rem;
+                border-bottom: 1px solid #eee;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .modal-header h3 {
+                margin: 0;
+                color: #1a237e;
+            }
+            
+            .close-modal {
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+                color: #666;
+            }
+            
+            .modal-body {
+                padding: 1.5rem;
+            }
+            
+            .event-details {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .detail-item {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .detail-item label {
+                font-weight: 500;
+                color: #333;
+            }
+            
+            .detail-item p {
+                margin: 0;
+                color: #666;
+            }
+            
+            .form-group {
+                margin-bottom: 1rem;
+            }
+            
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: #333;
+                font-weight: 500;
+            }
+            
+            .form-control {
+                width: 100%;
+                padding: 0.8rem;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                font-size: 1rem;
+            }
+            
+            .form-control:focus {
+                outline: none;
+                border-color: #1a237e;
+            }
+            
+            .form-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            
+            @media (max-width: 768px) {
+                .form-row {
+                    grid-template-columns: 1fr;
+                }
+            }
+            
+            .modal-footer {
+                padding: 1.5rem;
+                border-top: 1px solid #eee;
+                display: flex;
+                justify-content: flex-end;
+                gap: 1rem;
+            }
+        `;
+        document.head.appendChild(modalStyles);
+    </script>
+</body>
+</html>
 
