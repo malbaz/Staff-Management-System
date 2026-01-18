@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملف الشخصي - مكتب إدارة الطيف الترددي</title>
+    <base target="_self">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <style>
+        .profile-page {
+            min-height: 100vh;
+            background: #f5f7fa;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .page-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .page-title {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        
+        .profile-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 2rem;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .profile-sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .profile-name {
+            font-size: 1.5rem;
+            color: #1a237e;
+            margin: 0 0 0.5rem;
+        }
+        
+        .profile-title {
+            color: #666;
+            margin: 0 0 1rem;
+        }
+        
+        .profile-department {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #e3f2fd;
+            color: #1a237e;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        
+        .profile-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a237e;
+            margin: 0;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+        }
+        
+        .profile-content {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .section-title {
+            color: #1a237e;
+            margin: 0 0 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .info-item {
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .info-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0 0 0.5rem;
+        }
+        
+        .info-value {
+            font-size: 1.1rem;
+            color: #333;
+            margin: 0;
+        }
+        
+        .form-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #f0f0f0;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #1a237e;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .back-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+            border: none;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body class="profile-page">
+    <!-- رأس الصفحة -->
+    <header class="page-header">
+        <div class="page-header-content">
+            <div>
+                <h1 class="page-title"><i class="fas fa-user"></i> الملف الشخصي</h1>
+                <p>إدارة معلومات حسابك الشخصي</p>
+            </div>
+            <div class="page-actions">
+                <a href="dashboard.html" class="back-btn">
+                    <i class="fas fa-arrow-right"></i> العودة
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="profile-container">
+        <!-- الشريط الجانبي -->
+        <div class="profile-sidebar">
+            <div class="profile-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <h2 class="profile-name" id="profileName">جارٍ التحميل...</h2>
+            <p class="profile-title" id="profileJobTitle">-</p>
+            <span class="profile-department" id="profileDepartment">-</span>
+            
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <p class="stat-value" id="totalTasksCount">0</p>
+                    <p class="stat-label">المهام</p>
+                </div>
+                <div class="stat-item">
+                    <p class="stat-value" id="completedTasksCount">0</p>
+                    <p class="stat-label">مكتملة</p>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" style="width: 100%;" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+            </button>
+        </div>
+
+        <!-- المحتوى الرئيسي -->
+        <div class="profile-content">
+            <!-- المعلومات الشخصية -->
+            <div>
+                <h2 class="section-title"><i class="fas fa-info-circle"></i> المعلومات الشخصية</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <p class="info-label">اسم المستخدم</p>
+                        <p class="info-value" id="profileUsername">-</p>
+                    </div>
+                    <div class="info-item">
+                        <p class="info-label">البريد الإلكتروني</p>
+                        <p class="info-value" id="profileEmail">-</p>
+                    </div>
+                    <div class="info-item">
+                        <p class="info-label">رقم الجوال</p>
+                        <p class="info-value" id="profilePhone">-</p>
+                    </div>
+                    <div class="info-item">
+                        <p class="info-label">تاريخ التسجيل</p>
+                        <p class="info-value" id="profileJoinDate">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تغيير كلمة المرور -->
+            <div class="form-section">
+                <h2 class="section-title"><i class="fas fa-key"></i> تغيير كلمة المرور</h2>
+                <form id="changePasswordForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="currentPassword">كلمة المرور الحالية *</label>
+                            <input type="password" id="currentPassword" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">كلمة المرور الجديدة *</label>
+                            <input type="password" id="newPassword" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="confirmPassword">تأكيد كلمة المرور الجديدة *</label>
+                            <input type="password" id="confirmPassword" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label style="visibility: hidden;">زر الحفظ</label>
+                            <button type="submit" class="btn btn-success" style="width: 100%;">
+                                <i class="fas fa-save"></i> حفظ التغييرات
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- معلومات إضافية -->
+            <div class="form-section">
+                <h2 class="section-title"><i class="fas fa-cog"></i> إعدادات الحساب</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <p class="info-label">حالة الحساب</p>
+                        <p class="info-value" id="accountStatus">نشط</p>
+                    </div>
+                    <div class="info-item">
+                        <p class="info-label">آخر تسجيل دخول</p>
+                        <p class="info-value" id="lastLogin">-</p>
+                    </div>
+                    <div class="info-item">
+                        <p class="info-label">الصلاحيات</p>
+                        <p class="info-value" id="userPermissions">-</p>
+                    </div>
+                    <div class="info-item">
+                        <p class="info-label">عدد المهام النشطة</p>
+                        <p class="info-value" id="activeTasks">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // تحميل بيانات الملف الشخصي
+        function loadProfileData() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // تحديث المعلومات الشخصية
+            document.getElementById('profileName').textContent = currentUser.name;
+            document.getElementById('profileUsername').textContent = currentUser.username;
+            document.getElementById('profileEmail').textContent = currentUser.email;
+            document.getElementById('profilePhone').textContent = currentUser.phone;
+            document.getElementById('profileJobTitle').textContent = currentUser.jobTitle;
+            document.getElementById('profileDepartment').textContent = currentUser.department;
+            document.getElementById('userPermissions').textContent = currentUser.permissions.includes('all') ? 'مدير النظام' : 'موظف';
+            
+            // حساب إحصائيات المهام
+            const userTasks = tasks.filter(task => task.assignedTo === currentUser.id);
+            const completedTasks = userTasks.filter(task => task.status === 'مكتمل').length;
+            
+            document.getElementById('totalTasksCount').textContent = userTasks.length;
+            document.getElementById('completedTasksCount').textContent = completedTasks;
+            document.getElementById('activeTasks').textContent = userTasks.filter(task => task.status === 'قيد التنفيذ').length;
+            
+            // تحديث تاريخ التسجيل وآخر دخول
+            const joinDate = localStorage.getItem('userJoinDate') || new Date().toISOString().split('T')[0];
+            const lastLogin = localStorage.getItem('lastLogin') || new Date().toISOString();
+            
+            document.getElementById('profileJoinDate').textContent = formatDate(joinDate);
+            document.getElementById('lastLogin').textContent = formatDateTime(lastLogin);
+            
+            // حفظ تاريخ التسجيل إذا لم يكن موجوداً
+            if (!localStorage.getItem('userJoinDate')) {
+                localStorage.setItem('userJoinDate', joinDate);
+            }
+        }
+        
+        // تنسيق التاريخ
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ar-SA', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+        
+        // تنسيق التاريخ والوقت
+        function formatDateTime(dateTimeString) {
+            const date = new Date(dateTimeString);
+            return date.toLocaleString('ar-SA', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+        
+        // تغيير كلمة المرور
+        function setupPasswordChange() {
+            const form = document.getElementById('changePasswordForm');
+            
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const currentPassword = document.getElementById('currentPassword').value;
+                    const newPassword = document.getElementById('newPassword').value;
+                    const confirmPassword = document.getElementById('confirmPassword').value;
+                    
+                    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                    
+                    // التحقق من كلمة المرور الحالية
+                    if (currentPassword !== currentUser.password) {
+                        alert('كلمة المرور الحالية غير صحيحة');
+                        return;
+                    }
+                    
+                    // التحقق من تطابق كلمتي المرور الجديدتين
+                    if (newPassword !== confirmPassword) {
+                        alert('كلمة المرور الجديدة غير متطابقة');
+                        return;
+                    }
+                    
+                    // التحقق من قوة كلمة المرور
+                    if (newPassword.length < 6) {
+                        alert('كلمة المرور يجب أن تكون 6 أحرف على الأقل');
+                        return;
+                    }
+                    
+                    // تحديث كلمة المرور في قاعدة البيانات
+                    const employees = JSON.parse(localStorage.getItem('employees'));
+                    const employeeIndex = employees.findIndex(emp => emp.id === currentUser.id);
+                    
+                    if (employeeIndex !== -1) {
+                        employees[employeeIndex].password = newPassword;
+                        localStorage.setItem('employees', JSON.stringify(employees));
+                        
+                        // تحديث المستخدم الحالي
+                        currentUser.password = newPassword;
+                        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                        
+                        alert('تم تغيير كلمة المرور بنجاح');
+                        form.reset();
+                    } else {
+                        alert('حدث خطأ في تحديث كلمة المرور');
+                    }
+                });
+            }
+        }
+        
+        // تسجيل الخروج
+        function logout() {
+            if (confirm('هل تريد تسجيل الخروج؟')) {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+            }
+        }
+        
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProfileData();
+            setupPasswordChange();
+        });
+    </script>
+</body>
+</html>
