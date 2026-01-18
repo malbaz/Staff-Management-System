@@ -3,16 +3,620 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مكتب إدارة الطيف الترددي</title>
+    <title>مكتب إدارة الطيف الترددي - نظام إدارة المهام</title>
     <base target="_self">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
 </head>
 <body>
-    <div class="container">
-        <h1>مرحباً بك في نظام إدارة المهام</h1>
-        <p>مكتب إدارة الطيف الترددي</p>
-        <a href="login.html" class="btn">تسجيل الدخول</a>
-    </div>
-    <script src="js/main.js"></script>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="images/logo.png" alt="شعار مكتب إدارة الطيف الترددي" class="logo">
+                <span>مكتب إدارة الطيف الترددي</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="login.html" class="nav-link"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                <a href="#features" class="nav-link"><i class="fas fa-star"></i> المميزات</a>
+                <a href="#contact" class="nav-link"><i class="fas fa-phone"></i> اتصل بنا</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- قسم البطل -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">نظام إدارة المهام والمشاريع</h1>
+            <p class="hero-subtitle">ربط الموظفين، إسناد المهام، متابعة الإنجاز، وأجندة أعمال متكاملة</p>
+            <div class="hero-buttons">
+                <a href="login.html" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    <i class="fas fa-info-circle"></i> تعرف على المميزات
+                </a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://picsum.photos/600/400?random=1" alt="فريق العمل المتعاون">
+        </div>
+    </section>
+
+    <!-- قسم المميزات -->
+    <section id="features" class="features">
+        <h2 class="section-title">مميزات النظام</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <h3>إدارة المهام</h3>
+                <p>إسناد ومتابعة المهام بين الموظفين بسهولة وكفاءة</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3>أجندة الأعمال</h3>
+                <p>تنظيم الاجتماعات والمواعيد والمهام في تقويم موحد</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>متابعة الإنجاز</h3>
+                <p>تقارير وإحصائيات عن أداء الموظفين وتقدم المشاريع</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>ربط الموظفين</h3>
+                <p>تواصل وتعاون بين جميع أفراد الفريق في مكان واحد</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>متعدد المنصات</h3>
+                <p>يعمل على جميع الأجهزة (كمبيوتر، هاتف، تابليت)</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>نظام آمن</h3>
+                <p>حماية بيانات الموظفين والمعلومات الحساسة</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم كيفية الاستخدام -->
+    <section class="how-to-use">
+        <h2 class="section-title">كيفية استخدام النظام</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>تسجيل الدخول</h3>
+                <p>استخدم بيانات الدخول المخصصة لك</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>استعراض المهام</h3>
+                <p>شاهد المهام المسندة إليك والمكتملة</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>إضافة مهام جديدة</h3>
+                <p>قم بإسناد مهام جديدة لزملائك في العمل</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>متابعة التقدم</h3>
+                <p>تابع تقدم المهام والإنجازات اليومية</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم اتصل بنا -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">اتصل بنا</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <h3>الهاتف</h3>
+                <p>+966 11 123 4567</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <h3>البريد الإلكتروني</h3>
+                <p>support@spectrum.gov.sa</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>العنوان</h3>
+                <p>الرياض - المملكة العربية السعودية</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="شعار المكتب" class="logo">
+                <h3>مكتب إدارة الطيف الترددي</h3>
+                <p>نظام إدارة المهام والمشاريع</p>
+            </div>
+            <div class="footer-links">
+                <h4>روابط سريعة</h4>
+                <a href="index.html">الرئيسية</a>
+                <a href="login.html">تسجيل الدخول</a>
+                <a href="#features">المميزات</a>
+                <a href="#contact">اتصل بنا</a>
+            </div>
+            <div class="footer-social">
+                <h4>تابعنا</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 مكتب إدارة الطيف الترددي. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
 </body>
 </html>
+
+الملف 2: style.css (ملف التنسيقات)
+
+/* التنسيقات العامة */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+    direction: rtl;
+}
+
+/* شريط التنقل */
+.navbar {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    color: white;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nav-brand span {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* قسم البطل */
+.hero {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-content {
+    text-align: right;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    color: #1a237e;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.8rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(26, 35, 126, 0.3);
+}
+
+.btn-secondary {
+    background: white;
+    color: #1a237e;
+    border: 2px solid #1a237e;
+}
+
+.btn-secondary:hover {
+    background: #1a237e;
+    color: white;
+}
+
+.hero-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* قسم المميزات */
+.features {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 2rem;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #1a237e;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.8rem;
+}
+
+.feature-card h3 {
+    color: #1a237e;
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* قسم كيفية الاستخدام */
+.how-to-use {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 10px;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.step {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    position: relative;
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 1rem;
+}
+
+.step h3 {
+    color: #1a237e;
+    margin-bottom: 0.5rem;
+}
+
+.step p {
+    color: #666;
+}
+
+/* قسم اتصل بنا */
+.contact {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 2rem;
+}
+
+.contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.contact-item {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.contact-item i {
+    font-size: 2.5rem;
+    color: #1a237e;
+    margin-bottom: 1rem;
+}
+
+.contact-item h3 {
+    color: #1a237e;
+    margin-bottom: 0.5rem;
+}
+
+.contact-item p {
+    color: #666;
+}
+
+/* التذييل */
+.footer {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    color: white;
+    padding: 3rem 0 0;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+}
+
+.footer-logo {
+    text-align: right;
+}
+
+.footer-logo .logo {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+}
+
+.footer-logo h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.footer-links h4 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.footer-links a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-social h4 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icons a {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background: white;
+    color: #1a237e;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.8);
+}
+
+/* تصميم متجاوب */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .hero-content {
+        text-align: center;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .features-grid,
+    .steps,
+    .contact-info {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .footer-logo {
+        text-align: center;
+    }
+}
