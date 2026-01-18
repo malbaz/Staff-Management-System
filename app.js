@@ -474,3 +474,57 @@ window.deleteEmployee = function(employeeId) {
 function showAddEmployeeModal() {
     alert('سيتم عرض نموذج إضافة موظف هنا');
 }
+
+// تحديث ملف app.js لإضافة وظائف الأجندة والمزامنة
+
+// ... (الكود الحالي يبقى كما هو)
+
+// وظائف الأجندة
+function initializeCalendarModule() {
+    // إضافة عنصر القائمة الجديد
+    const sidebarMenu = document.querySelector('.sidebar-menu');
+    if (sidebarMenu) {
+        const calendarItem = document.createElement('li');
+        calendarItem.innerHTML = `
+            <a href="calendar.html">
+                <i class="fas fa-calendar-alt"></i> الأجندة
+            </a>
+        `;
+        sidebarMenu.insertBefore(calendarItem, sidebarMenu.children[4]);
+    }
+    
+    // تحديث الروابط في لوحة التحكم
+    const quickActions = document.querySelector('.quick-actions');
+    if (quickActions) {
+        const calendarAction = document.createElement('a');
+        calendarAction.className = 'action-btn';
+        calendarAction.href = 'calendar.html';
+        calendarAction.innerHTML = `
+            <div class="action-icon">
+                <i class="fas fa-calendar-alt"></i>
+            </div>
+            <span>الأجندة</span>
+        `;
+        quickActions.appendChild(calendarAction);
+    }
+}
+
+// تهيئة جميع الوحدات
+document.addEventListener('DOMContentLoaded', function() {
+    initializeLoginModule();
+    initializeDashboardModule();
+    initializeTasksModule();
+    initializeEmployeesModule();
+    initializeProfileModule();
+    initializeCalendarModule(); // <-- إضافة هذه السطر
+    
+    // التحقق من تسجيل الدخول في كل الصفحات
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser && !window.location.pathname.includes('login.html') && !window.location.pathname.includes('index.html')) {
+        window.location.href = 'login.html';
+    }
+    
+    // حفظ آخر زيارة
+    localStorage.setItem('lastLogin', new Date().toISOString());
+});
+
