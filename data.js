@@ -69,8 +69,8 @@ const defaultEmployees = [
         username: 'admin',
         password: 'admin123',
         name: 'مدير النظام',
-        email: 'admin@spectrum.gov.sa',
-        phone: '0501234567',
+        email: ' 7mooody2009@gmail.com',
+        phone: '0554300039',
         department: 'الإدارة',
         jobTitle: 'مدير النظام',
         permissions: ['all'],
@@ -78,12 +78,12 @@ const defaultEmployees = [
     },
     {
         id: 2,
-        username: 'ahmed',
-        password: 'ahmed123',
-        name: 'أحمد محمد',
+        username: 'waseem',
+        password: 'waseem123',
+        name: 'hzam',
         email: 'ahmed@spectrum.gov.sa',
         phone: '0507654321',
-        department: 'التقنية',
+        department: 'سكرتارية',
         jobTitle: 'مطور ويب',
         permissions: ['view_tasks', 'create_tasks', 'edit_tasks'],
         joinDate: '2024-01-15'
@@ -137,7 +137,7 @@ function initializeData() {
     }
     
     if (!localStorage.getItem('departments')) {
-        const departments = ['الإدارة', 'التقنية', 'المالية', 'المبيعات', 'الدعم الفني', 'التدريب'];
+        const departments = ['الإدارة', 'سكرتارية', 'شعبة تخطيط الطيف الترددي', 'شعبة عمليات الطيف الترددي', 'شعبة مكتب التواصل لشؤون الطيف الترددي'];
         localStorage.setItem('departments', JSON.stringify(departments));
     }
     
@@ -154,3 +154,4 @@ function initializeData() {
 
 // تصدير الدوال
 window.initializeData = initializeData;
+
