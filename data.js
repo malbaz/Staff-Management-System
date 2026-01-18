@@ -155,3 +155,59 @@ function initializeData() {
 // تصدير الدوال
 window.initializeData = initializeData;
 
+// إضافة بيانات الأحداث الافتراضية
+const defaultCalendarEvents = [
+    {
+        id: 'event-1',
+        title: 'اجتماع إدارة الطيف الترددي',
+        description: 'اجتماع شهري لمناقشة استراتيجيات إدارة الطيف الترددي',
+        start: '2024-03-01T10:00:00',
+        end: '2024-03-01T12:00:00',
+        color: '#1a237e',
+        extendedProps: {
+            type: 'event'
+        }
+    },
+    {
+        id: 'event-2',
+        title: 'ورشة عمل التقنيات اللاسلكية',
+        description: 'ورشة عمل لتدريب الموظفين على أحدث التقنيات اللاسلكية',
+        start: '2024-03-15T09:00:00',
+        end: '2024-03-16T17:00:00',
+        color: '#28a745',
+        extendedProps: {
+            type: 'event'
+        }
+    }
+];
+
+// تحديث دالة initializeData
+function initializeData() {
+    if (!localStorage.getItem('tasks')) {
+        localStorage.setItem('tasks', JSON.stringify(defaultTasks));
+    }
+    
+    if (!localStorage.getItem('employees')) {
+        localStorage.setItem('employees', JSON.stringify(defaultEmployees));
+    }
+    
+    if (!localStorage.getItem('calendarEvents')) {
+        localStorage.setItem('calendarEvents', JSON.stringify(defaultCalendarEvents));
+    }
+    
+    if (!localStorage.getItem('departments')) {
+        const departments = ['الإدارة', 'التقنية', 'المالية', 'المبيعات', 'الدعم الفني', 'التدريب'];
+        localStorage.setItem('departments', JSON.stringify(departments));
+    }
+    
+    if (!localStorage.getItem('taskStatuses')) {
+        const statuses = ['معلق', 'قيد التنفيذ', 'مكتمل', 'ملغي'];
+        localStorage.setItem('taskStatuses', JSON.stringify(statuses));
+    }
+    
+    if (!localStorage.getItem('taskPriorities')) {
+        const priorities = ['منخفض', 'متوسط', 'عالي'];
+        localStorage.setItem('taskPriorities', JSON.stringify(priorities));
+    }
+}
+
