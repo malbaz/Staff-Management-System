@@ -42,8 +42,19 @@ function initMobileMenu() {
 function loadInitialData() {
     if (!localStorage.getItem('employees')) {
         const initialEmployees = [
-            { id: 1, username: 'admin', password: 'admin123', name: 'مدير النظام', email: 'admin@spectrum.gov.sa', phone: '0501234567', department: 'الإدارة', jobTitle: 'مدير النظام', permissions: ['all'] },
-            { id: 2, username: 'ahmed', password: 'ahmed123', name: 'أحمد محمد', email: 'ahmed@spectrum.gov.sa', phone: '0507654321', department: 'التقنية', jobTitle: 'مطور ويب', permissions: ['view_tasks', 'create_tasks'] }
+            { id: 1, username: 'admin', password: 'admin123', name: 'محمد بن سعد الباز', email: '7mooody2009@gmail.com', phone: '0554300039', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'مدير مكتب التواصل لشؤون الطيف الترددي', permissions: ['all'] },
+            { id: 2, username: 'waseem', password: 'waseem123', name: 'أوسيم بن عمر العمودي', email: 'wamoudi@tel.moi.gov.sa', phone: '0503714473', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'مدير مكتب إدارة الطيف الترددي', permissions: ['all'] }
+            { id: 3, username: 'hzam', password: 'hzam123', name: ' النقيب مهندس/حزام بن علي ال وافي', email: 'haalwafi@hq.gov.sa', phone: '0534060383', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'مدير شعبة تخطيط الطيف الترددي', permissions: ['view_tasks', 'create_tasks'] }
+            { id: 4, username: 'omar', password: 'omar123', name: 'النقيب مهندس/عمر عطا لله العوض ', email: 'admin@spectrum.gov.sa', phone: '0535318316', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' مدير شعبة عمليات الطيف الترددي', permissions: ['view_tasks', 'create_tasks'] },
+            { id: 5, username: 'khaled', password: 'khaled123', name: 'خالد القاسم', email: 'ahmed@spectrum.gov.sa', phone: '0535555399', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'سكرتارية ', permissions: ['view_tasks', 'create_tasks'] }
+            { id: 6, username: 'samih', password: 'samih123', name: 'سميح بن عباللع الوذيناني', email: 'ahmed@spectrum.gov.sa', phone: '0500337522', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' سكرتارية', permissions: ['view_tasks', 'create_tasks'] }
+            { id: 7, username: 'saud', password: 'saud123', name: 'سعود بن إبراهيم الجلعود, email: 'saud@spectrum.gov.sa', phone: '0501234567', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' سكرتارية', permissions: ['view_tasks', 'create_tasks'] },
+            { id: 8, username: 'afaf', password: 'afaf123', name: 'عفاف الخليفة', email: 'afaf@spectrum.gov.sa', phone: '0550909382', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' متعاقدة', permissions: ['view_tasks', 'create_tasks'] }
+            { id: 9, username: 'ayshah', password: 'ayshah123', name: 'عائشة عبدالله الشهراني', email: 'ayshah1790@gmail.com', phone: '0536660016', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' متعاقدة', permissions: ['view_tasks', 'create_tasks'] }
+
+
+
+            
         ];
         localStorage.setItem('employees', JSON.stringify(initialEmployees));
     }
@@ -527,4 +538,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // حفظ آخر زيارة
     localStorage.setItem('lastLogin', new Date().toISOString());
 });
+
 
