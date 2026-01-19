@@ -1,1 +1,26 @@
+// دالة لتحميل ملف Excel
+function handleFileUpload(file) {
+  const reader = new FileReader();
+  
+  reader.onload = function(e) {
+    const data = new Uint8Array(e.target.result);
+    const workbook = XLSX.read(data, { type: 'array' });
+    
+    // معالجة البيانات (مثال: أول ورقة في الملف)
+    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+    const jsonData = XLSX.utils.sheet_to_json(firstSheet);
+    
+    console.log("البيانات المستوردة:", jsonData);
+    alert("تم استيراد البيانات بنجاح!");
+  };
+  
+  reader.readAsArrayBuffer(file);
+}
 
+// حدث عند اختيار ملف
+document.getElementById('fileInput').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (file) {
+    handleFileUpload(file);
+  }
+});
