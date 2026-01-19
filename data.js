@@ -196,7 +196,7 @@ function initializeData() {
     }
     
     if (!localStorage.getItem('departments')) {
-        const departments = ['الإدارة', 'التقنية', 'المالية', 'المبيعات', 'الدعم الفني', 'التدريب'];
+        const departments = ['الإدارة', 'سكرتارية', 'شعبة تخطيط الطيف الترددي', 'شعبة عمليات الطيف الترددي', 'شعبة مكتب التواصل لشؤون الطيف التردد'];
         localStorage.setItem('departments', JSON.stringify(departments));
     }
     
@@ -210,4 +210,5 @@ function initializeData() {
         localStorage.setItem('taskPriorities', JSON.stringify(priorities));
     }
 }
+
 
