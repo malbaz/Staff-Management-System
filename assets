@@ -1,1 +1,2 @@
-git rm path/to/ypur/file.txt
+git rm -r path/to/your/directory
+
