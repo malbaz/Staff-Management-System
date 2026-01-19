@@ -28,7 +28,7 @@ function initMobileMenu() {
 
     if (mobileMenuBtn && navMenu) {
         mobileMenuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active'); // استخدام كلاس لتفعيل/إلغاء تفعيل القائمة
+            navMenu.classList.toggle('active');
         });
 
         document.addEventListener('click', (event) => {
@@ -42,19 +42,15 @@ function initMobileMenu() {
 function loadInitialData() {
     if (!localStorage.getItem('employees')) {
         const initialEmployees = [
-            { id: 1, username: 'admin', password: 'admin123', name: 'محمد بن سعد الباز', email: '7mooody2009@gmail.com', phone: '0554300039', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'مدير مكتب التواصل لشؤون الطيف الترددي', permissions: ['all'] },
-            { id: 2, username: 'waseem', password: 'waseem123', name: 'أوسيم بن عمر العمودي', email: 'wamoudi@tel.moi.gov.sa', phone: '0503714473', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'مدير مكتب إدارة الطيف الترددي', permissions: ['all'] }
-            { id: 3, username: 'hzam', password: 'hzam123', name: ' النقيب مهندس/حزام بن علي ال وافي', email: 'haalwafi@hq.gov.sa', phone: '0534060383', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'مدير شعبة تخطيط الطيف الترددي', permissions: ['view_tasks', 'create_tasks'] }
+            { id: 1, username: 'mbaz', password: 'mbaz123', name: 'محمد بن سعد الباز', email: '7mooody2009@gmail.com', phone: '0554300039', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'مدير مكتب التواصل لشؤون الطيف الترددي', permissions: ['all'] },
+            { id: 2, username: 'waseem', password: 'waseem123', name: 'أوسيم بن عمر العمودي', email: 'wamoudi@tel.moi.gov.sa', phone: '0503714473', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'مدير مكتب إدارة الطيف الترددي', permissions: ['view_tasks', 'create_tasks'] },
+            { id: 3, username: 'hzam', password: 'hzam123', name: ' النقيب مهندس/حزام بن علي ال وافي', email: 'haalwafi@hq.gov.sa', phone: '0534060383', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'مدير شعبة تخطيط الطيف الترددي', permissions: ['view_tasks', 'create_tasks'] },
             { id: 4, username: 'omar', password: 'omar123', name: 'النقيب مهندس/عمر عطا لله العوض ', email: 'admin@spectrum.gov.sa', phone: '0535318316', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' مدير شعبة عمليات الطيف الترددي', permissions: ['view_tasks', 'create_tasks'] },
-            { id: 5, username: 'khaled', password: 'khaled123', name: 'خالد القاسم', email: 'ahmed@spectrum.gov.sa', phone: '0535555399', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'سكرتارية ', permissions: ['view_tasks', 'create_tasks'] }
-            { id: 6, username: 'samih', password: 'samih123', name: 'سميح بن عباللع الوذيناني', email: 'ahmed@spectrum.gov.sa', phone: '0500337522', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' سكرتارية', permissions: ['view_tasks', 'create_tasks'] }
-            { id: 7, username: 'saud', password: 'saud123', name: 'سعود بن إبراهيم الجلعود, email: 'saud@spectrum.gov.sa', phone: '0501234567', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' سكرتارية', permissions: ['view_tasks', 'create_tasks'] },
-            { id: 8, username: 'afaf', password: 'afaf123', name: 'عفاف الخليفة', email: 'afaf@spectrum.gov.sa', phone: '0550909382', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' متعاقدة', permissions: ['view_tasks', 'create_tasks'] }
+            { id: 5, username: 'khaled', password: 'khaled123', name: 'خالد القاسم', email: 'ahmed@spectrum.gov.sa', phone: '0535555399', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'سكرتارية ', permissions: ['view_tasks', 'create_tasks'] },
+            { id: 6, username: 'samih', password: 'samih123', name: 'سميح بن عباللع الوذيناني', email: 'ahmed@spectrum.gov.sa', phone: '0500337522', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' سكرتارية', permissions: ['view_tasks', 'create_tasks'] },
+            { id: 7, username: 'saud', password: 'saud123', name: 'سعود بن إبراهيم الجلعود', email: 'saud@spectrum.gov.sa', phone: '0501234567', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' سكرتارية', permissions: ['view_tasks', 'create_tasks'] },
+            { id: 8, username: 'afaf', password: 'afaf123', name: 'عفاف الخليفة', email: 'afaf@spectrum.gov.sa', phone: '0550909382', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' متعاقدة', permissions: ['view_tasks', 'create_tasks'] },
             { id: 9, username: 'ayshah', password: 'ayshah123', name: 'عائشة عبدالله الشهراني', email: 'ayshah1790@gmail.com', phone: '0536660016', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' متعاقدة', permissions: ['view_tasks', 'create_tasks'] }
-
-
-
-            
         ];
         localStorage.setItem('employees', JSON.stringify(initialEmployees));
     }
@@ -241,10 +237,10 @@ function loadAndDisplayTasks() {
                 </div>
             </div>
             <div class="task-footer">
-                <button class="btn btn-sm btn-primary" onclick="window.editTask(${task.id})">
+                <button class="btn btn-sm btn-primary" onclick="editTask(${task.id})">
                     <i class="fas fa-edit"></i> تعديل
                 </button>
-                <button class="btn btn-sm btn-danger" onclick="window.deleteTask(${task.id})">
+                <button class="btn btn-sm btn-danger" onclick="deleteTask(${task.id})">
                     <i class="fas fa-trash"></i> حذف
                 </button>
             </div>
@@ -285,10 +281,10 @@ function loadAndDisplayEmployees() {
                 <p><i class="fas fa-phone"></i> ${employee.phone}</p>
             </div>
             <div class="employee-actions">
-                <button class="btn btn-sm btn-primary" onclick="window.editEmployee(${employee.id})">
+                <button class="btn btn-sm btn-primary" onclick="editEmployee(${employee.id})">
                     <i class="fas fa-edit"></i>
                 </button>
-                <button class="btn btn-sm btn-danger" onclick="window.deleteEmployee(${employee.id})">
+                <button class="btn btn-sm btn-danger" onclick="deleteEmployee(${employee.id})">
                     <i class="fas fa-trash"></i>
                 </button>
             </div>
@@ -454,11 +450,11 @@ function filterTasks() {
     });
 }
 
-window.editTask = function(taskId) {
+function editTask(taskId) {
     alert(`تعديل المهمة رقم ${taskId}`);
-};
+}
 
-window.deleteTask = function(taskId) {
+function deleteTask(taskId) {
     if (confirm('هل أنت متأكد من حذف هذه المهمة؟')) {
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         tasks = tasks.filter(task => task.id !== taskId);
@@ -466,13 +462,13 @@ window.deleteTask = function(taskId) {
         loadAndDisplayTasks();
         alert('تم حذف المهمة بنجاح');
     }
-};
+}
 
-window.editEmployee = function(employeeId) {
+function editEmployee(employeeId) {
     alert(`تعديل بيانات الموظف رقم ${employeeId}`);
-};
+}
 
-window.deleteEmployee = function(employeeId) {
+function deleteEmployee(employeeId) {
     if (confirm('هل أنت متأكد من حذف هذا الموظف؟')) {
         let employees = JSON.parse(localStorage.getItem('employees')) || [];
         employees = employees.filter(emp => emp.id !== employeeId);
@@ -480,7 +476,7 @@ window.deleteEmployee = function(employeeId) {
         loadAndDisplayEmployees();
         alert('تم حذف الموظف بنجاح');
     }
-};
+}
 
 function showAddEmployeeModal() {
     alert('سيتم عرض نموذج إضافة موظف هنا');
@@ -538,5 +534,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // حفظ آخر زيارة
     localStorage.setItem('lastLogin', new Date().toISOString());
 });
-
-
