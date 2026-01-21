@@ -1,5 +1,5 @@
 // بيانات الموظفين الافتراضية
-const defaultEmployees = [
+const defaultTasks = [
     {
         id: 1,
         username: 'mbaz',
@@ -78,4 +78,5 @@ function initializeData() {
 
 // تصدير الدوال
 window.initializeData = initializeData;
+
 
