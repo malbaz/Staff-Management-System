@@ -1,3 +1,4 @@
+javascript
 // تطبيق مُحسَّن لإدارة المهام والموظفين
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -7,6 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
 });
 
+/
+  التحقق من حالة تسجيل الدخول وإعادة التوجيه بناءً على ذلك.
+ /
 function checkLoginStatus() {
     const currentUser = localStorage.getItem('currentUser');
     const currentPage = window.location.pathname.split('/').pop();
@@ -22,6 +26,9 @@ function checkLoginStatus() {
     }
 }
 
+/
+  تهيئة قائمة الجوال.
+ /
 function initMobileMenu() {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navMenu = document.querySelector('.nav-menu');
@@ -39,18 +46,21 @@ function initMobileMenu() {
     }
 }
 
+/
+  تحميل البيانات الأولية للموظفين والمهام من Local Storage إذا لم تكن موجودة.
+ /
 function loadInitialData() {
     if (!localStorage.getItem('employees')) {
         const initialEmployees = [
             { id: 1, username: 'mbaz', password: 'mbaz123', name: 'محمد بن سعد الباز', email: '7mooody2009@gmail.com', phone: '0554300039', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'مدير مكتب التواصل لشؤون الطيف الترددي', permissions: ['all'] },
-            { id: 2, username: 'waseem', password: 'waseem123', name: 'أوسيم بن عمر العمودي', email: 'wamoudi@tel.moi.gov.sa', phone: '0503714473', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'مدير مكتب إدارة الطيف الترددي', permissions: ['view_tasks', 'create_tasks'] },
-            { id: 3, username: 'hzam', password: 'hzam123', name: ' النقيب مهندس/حزام بن علي ال وافي', email: 'haalwafi@hq.gov.sa', phone: '0534060383', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'مدير شعبة تخطيط الطيف الترددي', permissions: ['view_tasks', 'create_tasks'] },
-            { id: 4, username: 'omar', password: 'omar123', name: 'النقيب مهندس/عمر عطا لله العوض ', email: 'admin@spectrum.gov.sa', phone: '0535318316', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' مدير شعبة عمليات الطيف الترددي', permissions: ['view_tasks', 'create_tasks'] },
-            { id: 5, username: 'khaled', password: 'khaled123', name: 'خالد القاسم', email: 'ahmed@spectrum.gov.sa', phone: '0535555399', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'سكرتارية ', permissions: ['view_tasks', 'create_tasks'] },
-            { id: 6, username: 'samih', password: 'samih123', name: 'سميح بن عباللع الوذيناني', email: 'ahmed@spectrum.gov.sa', phone: '0500337522', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' سكرتارية', permissions: ['view_tasks', 'create_tasks'] },
-            { id: 7, username: 'saud', password: 'saud123', name: 'سعود بن إبراهيم الجلعود', email: 'saud@spectrum.gov.sa', phone: '0501234567', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' سكرتارية', permissions: ['view_tasks', 'create_tasks'] },
-            { id: 8, username: 'afaf', password: 'afaf123', name: 'عفاف الخليفة', email: 'afaf@spectrum.gov.sa', phone: '0550909382', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' متعاقدة', permissions: ['view_tasks', 'create_tasks'] },
-            { id: 9, username: 'ayshah', password: 'ayshah123', name: 'عائشة عبدالله الشهراني', email: 'ayshah1790@gmail.com', phone: '0536660016', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' متعاقدة', permissions: ['view_tasks', 'create_tasks'] }
+            { id: 2, username: 'waseem', password: 'waseem123', name: 'أوسيم بن عمر العمودي', email: 'wamoudi@tel.moi.gov.sa', phone: '0503714473', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'مدير مكتب إدارة الطيف الترددي', permissions: ['viewtasks', 'createtasks'] },
+            { id: 3, username: 'hzam', password: 'hzam123', name: ' النقيب مهندس/حزام بن علي ال وافي', email: 'haalwafi@hq.gov.sa', phone: '0534060383', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'مدير شعبة تخطيط الطيف الترددي', permissions: ['viewtasks', 'createtasks'] },
+            { id: 4, username: 'omar', password: 'omar123', name: 'النقيب مهندس/عمر عطا لله العوض ', email: 'admin@spectrum.gov.sa', phone: '0535318316', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' مدير شعبة عمليات الطيف الترددي', permissions: ['viewtasks', 'createtasks'] },
+            { id: 5, username: 'khaled', password: 'khaled123', name: 'خالد القاسم', email: 'ahmed@spectrum.gov.sa', phone: '0535555399', department: 'مكتب إدارة الطيف الترددي', jobTitle: 'سكرتارية ', permissions: ['viewtasks', 'createtasks'] },
+            { id: 6, username: 'samih', password: 'samih123', name: 'سميح بن عباللع الوذيناني', email: 'ahmed@spectrum.gov.sa', phone: '0500337522', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' سكرتارية', permissions: ['viewtasks', 'createtasks'] },
+            { id: 7, username: 'saud', password: 'saud123', name: 'سعود بن إبراهيم الجلعود', email: 'saud@spectrum.gov.sa', phone: '0501234567', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' سكرتارية', permissions: ['viewtasks', 'createtasks'] },
+            { id: 8, username: 'afaf', password: 'afaf123', name: 'عفاف الخليفة', email: 'afaf@spectrum.gov.sa', phone: '0550909382', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' متعاقدة', permissions: ['viewtasks', 'createtasks'] },
+            { id: 9, username: 'ayshah', password: 'ayshah123', name: 'عائشة عبدالله الشهراني', email: 'ayshah1790@gmail.com', phone: '0536660016', department: 'مكتب إدارة الطيف الترددي', jobTitle: ' متعاقدة', permissions: ['viewtasks', 'createtasks'] }
         ];
         localStorage.setItem('employees', JSON.stringify(initialEmployees));
     }
@@ -64,6 +74,9 @@ function loadInitialData() {
     }
 }
 
+/
+  إعداد مستمعي الأحداث للصفحات المختلفة.
+ /
 function setupEventListeners() {
     const currentPage = window.location.pathname.split('/').pop();
 
@@ -81,6 +94,9 @@ function setupEventListeners() {
     }
 }
 
+/
+  إعداد صفحة تسجيل الدخول.
+ /
 function setupLoginPage() {
     const loginForm = document.getElementById('loginForm');
 
@@ -113,7 +129,7 @@ function setupLoginPage() {
                 const user = employees.find(emp => emp.email === email);
 
                 if (user) {
-                    alert(`تم إرسال تعليمات استعادة كلمة المرور إلى ${email}`);
+                    alert(تم إرسال تعليمات استعادة كلمة المرور إلى ${email});
                 } else {
                     alert('البريد الإلكتروني غير مسجل في النظام');
                 }
@@ -122,6 +138,9 @@ function setupLoginPage() {
     }
 }
 
+/
+  إعداد صفحة لوحة التحكم.
+ /
 function setupDashboardPage() {
     updateDashboardStats();
 
@@ -140,6 +159,9 @@ function setupDashboardPage() {
     }
 }
 
+/
+  تحديث إحصائيات لوحة التحكم.
+ /
 function updateDashboardStats() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const employees = JSON.parse(localStorage.getItem('employees')) || [];
@@ -167,6 +189,10 @@ function updateDashboardStats() {
     displayRecentTasks(tasks.slice(0, 5));
 }
 
+/
+  عرض المهام الحديثة.
+  @param {Array<object>} tasks - قائمة المهام.
+ /
 function displayRecentTasks(tasks) {
     const recentTasksElement = document.getElementById('recentTasks');
     if (!recentTasksElement) return;
@@ -176,15 +202,18 @@ function displayRecentTasks(tasks) {
     tasks.forEach(task => {
         const taskElement = document.createElement('div');
         taskElement.className = 'task-item';
-        taskElement.innerHTML = `
+        taskElement.innerHTML = 
             <div class="task-title">${task.title}</div>
             <div class="task-status ${task.status.replace(' ', '-')}">${task.status}</div>
             <div class="task-due">${task.dueDate}</div>
-        `;
+        ;
         recentTasksElement.appendChild(taskElement);
     });
 }
 
+/
+  إعداد صفحة المهام.
+ /
 function setupTasksPage() {
     loadAndDisplayTasks();
 
@@ -199,6 +228,9 @@ function setupTasksPage() {
     }
 }
 
+/
+  تحميل وعرض المهام.
+ /
 function loadAndDisplayTasks() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const employees = JSON.parse(localStorage.getItem('employees')) || [];
@@ -223,7 +255,7 @@ function loadAndDisplayTasks() {
 
         const taskElement = document.createElement('div');
         taskElement.className = 'task-card';
-        taskElement.innerHTML = `
+        taskElement.innerHTML = 
             <div class="task-header">
                 <h3>${task.title}</h3>
                 <span class="task-priority ${task.priority}">${task.priority}</span>
@@ -244,11 +276,14 @@ function loadAndDisplayTasks() {
                     <i class="fas fa-trash"></i> حذف
                 </button>
             </div>
-        `;
+        ;
         tasksContainer.appendChild(taskElement);
     });
 }
 
+/
+  إعداد صفحة الموظفين.
+ /
 function setupEmployeesPage() {
     loadAndDisplayEmployees();
 
@@ -258,6 +293,9 @@ function setupEmployeesPage() {
     }
 }
 
+/
+  تحميل وعرض الموظفين.
+ /
 function loadAndDisplayEmployees() {
     const employees = JSON.parse(localStorage.getItem('employees')) || [];
     const employeesContainer = document.getElementById('employeesContainer');
@@ -269,7 +307,7 @@ function loadAndDisplayEmployees() {
     employees.forEach(employee => {
         const employeeElement = document.createElement('div');
         employeeElement.className = 'employee-card';
-        employeeElement.innerHTML = `
+        employeeElement.innerHTML = 
             <div class="employee-avatar">
                 <i class="fas fa-user-circle"></i>
             </div>
@@ -288,11 +326,14 @@ function loadAndDisplayEmployees() {
                     <i class="fas fa-trash"></i>
                 </button>
             </div>
-        `;
+        ;
         employeesContainer.appendChild(employeeElement);
     });
 }
 
+/
+  إعداد صفحة الملف الشخصي.
+ /
 function setupProfilePage() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -343,8 +384,11 @@ function setupProfilePage() {
     }
 }
 
+/
+  عرض نموذج إضافة مهمة.
+ /
 function showAddTaskModal() {
-    const modalHTML = `
+    const modalHTML = 
         <div class="modal" id="addTaskModal">
             <div class="modal-content">
                 <div class="modal-header">
@@ -384,7 +428,7 @@ function showAddTaskModal() {
                 </div>
             </div>
         </div>
-    `;
+    ;
 
     document.body.insertAdjacentHTML('beforeend', modalHTML);
 
@@ -404,13 +448,20 @@ function showAddTaskModal() {
     });
 }
 
+/
+  الحصول على خيارات الموظفين لنموذج الإضافة.
+  @returns {string} - سلسلة HTML لخيارات الموظفين.
+ /
 function getEmployeesOptions() {
     const employees = JSON.parse(localStorage.getItem('employees')) || [];
     return employees.map(emp =>
-        `<option value="${emp.id}">${emp.name} - ${emp.department}</option>`
+        <option value="${emp.id}">${emp.name} - ${emp.department}</option>
     ).join('');
 }
 
+/
+  إضافة مهمة جديدة.
+ /
 function addNewTask() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -434,6 +485,9 @@ function addNewTask() {
     alert('تم إضافة المهمة بنجاح');
 }
 
+/
+  تصفية المهام بناءً على مصطلح البحث.
+ /
 function filterTasks() {
     const searchTerm = document.getElementById('taskSearch').value.toLowerCase();
     const taskCards = document.querySelectorAll('.task-card');
@@ -450,10 +504,18 @@ function filterTasks() {
     });
 }
 
+/
+  تعديل مهمة.
+  @param {number} taskId - معرف المهمة.
+ /
 function editTask(taskId) {
-    alert(`تعديل المهمة رقم ${taskId}`);
+    alert(تعديل المهمة رقم ${taskId});
 }
 
+/
+  حذف مهمة.
+  @param {number} taskId - معرف المهمة.
+ /
 function deleteTask(taskId) {
     if (confirm('هل أنت متأكد من حذف هذه المهمة؟')) {
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -464,10 +526,18 @@ function deleteTask(taskId) {
     }
 }
 
+/
+  تعديل موظف.
+  @param {number} employeeId - معرف الموظف.
+ /
 function editEmployee(employeeId) {
-    alert(`تعديل بيانات الموظف رقم ${employeeId}`);
+    alert(تعديل بيانات الموظف رقم ${employeeId});
 }
 
+/
+  حذف موظف.
+  @param {number} employeeId - معرف الموظف.
+ /
 function deleteEmployee(employeeId) {
     if (confirm('هل أنت متأكد من حذف هذا الموظف؟')) {
         let employees = JSON.parse(localStorage.getItem('employees')) || [];
@@ -478,6 +548,9 @@ function deleteEmployee(employeeId) {
     }
 }
 
+/
+  عرض نموذج إضافة موظف.
+ /
 function showAddEmployeeModal() {
     alert('سيتم عرض نموذج إضافة موظف هنا');
 }
@@ -486,17 +559,19 @@ function showAddEmployeeModal() {
 
 // ... (الكود الحالي يبقى كما هو)
 
-// وظائف الأجندة
+/
+  تهيئة وحدة التقويم.
+ /
 function initializeCalendarModule() {
     // إضافة عنصر القائمة الجديد
     const sidebarMenu = document.querySelector('.sidebar-menu');
     if (sidebarMenu) {
         const calendarItem = document.createElement('li');
-        calendarItem.innerHTML = `
+        calendarItem.innerHTML = 
             <a href="calendar.html">
                 <i class="fas fa-calendar-alt"></i> الأجندة
             </a>
-        `;
+        ;
         sidebarMenu.insertBefore(calendarItem, sidebarMenu.children[4]);
     }
     
@@ -506,17 +581,19 @@ function initializeCalendarModule() {
         const calendarAction = document.createElement('a');
         calendarAction.className = 'action-btn';
         calendarAction.href = 'calendar.html';
-        calendarAction.innerHTML = `
+        calendarAction.innerHTML = 
             <div class="action-icon">
                 <i class="fas fa-calendar-alt"></i>
             </div>
             <span>الأجندة</span>
-        `;
+        ;
         quickActions.appendChild(calendarAction);
     }
 }
 
-// تهيئة جميع الوحدات
+/
+  تهيئة جميع الوحدات.
+ /
 document.addEventListener('DOMContentLoaded', function() {
     initializeLoginModule();
     initializeDashboardModule();
