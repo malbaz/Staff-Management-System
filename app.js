@@ -65,71 +65,102 @@ function loadInitialData() {
         localStorage.setItem('employees', JSON.stringify(initialEmployees));
     }
 
+      // تحميل بيانات المهام إذا لم تكن موجودة
     if (!localStorage.getItem('tasks')) {
         const initialTasks = [
-            { id: 1, title: 'تطوير واجهة النظام', description: 'تطوير واجهة المستخدم للنظام الجديد', assignedTo: 2, assignedBy: 1, status: 'قيد التنفيذ', priority: 'عالي', dueDate: '2024-03-15', createdAt: '2024-02-01' },
-            { id: 2, title: 'اختبار النظام', description: 'اختبار جميع وظائف النظام', assignedTo: 2, assignedBy: 1, status: 'معلق', priority: 'متوسط', dueDate: '2024-03-20', createdAt: '2024-02-05' }
+            {
+                id: 1,
+                title: 'تطوير واجهة النظام',
+                description: 'تطوير واجهة المستخدم للنظام الجديد',
+                assignedTo: 2,
+                assignedBy: 1,
+                status: 'قيد التنفيذ',
+                priority: 'عالي',
+                dueDate: '2024-03-15',
+                createdAt: '2024-02-01'
+            },
+            {
+                id: 2,
+                title: 'اختبار النظام',
+                description: 'اختبار جميع وظائف النظام',
+                assignedTo: 2,
+                assignedBy: 1,
+                status: 'معلق',
+                priority: 'متوسط',
+                dueDate: '2024-03-20',
+                createdAt: '2024-02-05'
+            }
         ];
         localStorage.setItem('tasks', JSON.stringify(initialTasks));
     }
 }
 
-/
-  إعداد مستمعي الأحداث للصفحات المختلفة.
- /
+// إعداد مستمعي الأحداث
 function setupEventListeners() {
+    // مستمعي الأحداث للصفحة الحالية
     const currentPage = window.location.pathname.split('/').pop();
-
-    const pageSetups = {
-        'login.html': setupLoginPage,
-        'dashboard.html': setupDashboardPage,
-        'tasks.html': setupTasksPage,
-        'employees.html': setupEmployeesPage,
-        'profile.html': setupProfilePage
-    };
-
-    const setupFunction = pageSetups[currentPage];
-    if (setupFunction) {
-        setupFunction();
+    
+    switch(currentPage) {
+        case 'login.html':
+            setupLoginPage();
+            break;
+        case 'dashboard.html':
+            setupDashboardPage();
+            break;
+        case 'tasks.html':
+            setupTasksPage();
+            break;
+        case 'employees.html':
+            setupEmployeesPage();
+            break;
+        case 'profile.html':
+            setupProfilePage();
+            break;
     }
 }
 
-/
-  إعداد صفحة تسجيل الدخول.
- /
+// إعداد صفحة تسجيل الدخول
 function setupLoginPage() {
     const loginForm = document.getElementById('loginForm');
-
+    
     if (loginForm) {
-        loginForm.addEventListener('submit', (e) => {
+        loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
-
+            
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-
+            
+            // التحقق من بيانات الدخول
             const employees = JSON.parse(localStorage.getItem('employees')) || [];
             const user = employees.find(emp => emp.username === username && emp.password === password);
-
+            
             if (user) {
+                // حفظ بيانات المستخدم الحالي
                 localStorage.setItem('currentUser', JSON.stringify(user));
+                
+                // تسجيل وقت الدخول
                 localStorage.setItem('lastLogin', new Date().toISOString());
+                
+                // توجيه إلى لوحة التحكم
                 window.location.href = 'dashboard.html';
             } else {
                 alert('اسم المستخدم أو كلمة المرور غير صحيحة');
             }
         });
     }
-
+    
+    // زر استعادة كلمة المرور
     const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
     if (forgotPasswordBtn) {
-        forgotPasswordBtn.addEventListener('click', () => {
+        forgotPasswordBtn.addEventListener('click', function() {
             const email = prompt('أدخل بريدك الإلكتروني:');
             if (email) {
+                // البحث عن المستخدم بالبريد الإلكتروني
                 const employees = JSON.parse(localStorage.getItem('employees')) || [];
                 const user = employees.find(emp => emp.email === email);
-
+                
                 if (user) {
-                    alert(تم إرسال تعليمات استعادة كلمة المرور إلى ${email});
+                    alert(`تم إرسال تعليمات استعادة كلمة المرور إلى ${email}`);
                 } else {
                     alert('البريد الإلكتروني غير مسجل في النظام');
                 }
@@ -138,20 +169,21 @@ function setupLoginPage() {
     }
 }
 
-/
-  إعداد صفحة لوحة التحكم.
- /
+// إعداد صفحة لوحة التحكم
 function setupDashboardPage() {
+    // تحديث إحصائيات لوحة التحكم
     updateDashboardStats();
-
+    
+    // زر تسجيل الخروج
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
+        logoutBtn.addEventListener('click', function() {
             localStorage.removeItem('currentUser');
             window.location.href = 'login.html';
         });
     }
-
+    
+    // عرض اسم المستخدم
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const userNameElement = document.getElementById('userName');
     if (userNameElement && currentUser) {
@@ -159,18 +191,19 @@ function setupDashboardPage() {
     }
 }
 
-/
-  تحديث إحصائيات لوحة التحكم.
- /
+// تحديث إحصائيات لوحة التحكم
 function updateDashboardStats() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const employees = JSON.parse(localStorage.getItem('employees')) || [];
-
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    
+    // حساب الإحصائيات
     const totalTasks = tasks.length;
     const completedTasks = tasks.filter(task => task.status === 'مكتمل').length;
     const pendingTasks = tasks.filter(task => task.status === 'معلق').length;
     const inProgressTasks = tasks.filter(task => task.status === 'قيد التنفيذ').length;
-
+    
+    // تحديث العناصر
     const elements = {
         'totalTasks': totalTasks,
         'completedTasks': completedTasks,
@@ -178,84 +211,83 @@ function updateDashboardStats() {
         'inProgressTasks': inProgressTasks,
         'totalEmployees': employees.length
     };
-
+    
     for (const [id, value] of Object.entries(elements)) {
         const element = document.getElementById(id);
         if (element) {
             element.textContent = value;
         }
     }
-
+    
+    // عرض المهام الأخيرة
     displayRecentTasks(tasks.slice(0, 5));
 }
 
-/
-  عرض المهام الحديثة.
-  @param {Array<object>} tasks - قائمة المهام.
- /
+// عرض ا��مهام الأخيرة
 function displayRecentTasks(tasks) {
     const recentTasksElement = document.getElementById('recentTasks');
     if (!recentTasksElement) return;
-
+    
     recentTasksElement.innerHTML = '';
-
+    
     tasks.forEach(task => {
         const taskElement = document.createElement('div');
         taskElement.className = 'task-item';
-        taskElement.innerHTML = 
+        taskElement.innerHTML = `
             <div class="task-title">${task.title}</div>
             <div class="task-status ${task.status.replace(' ', '-')}">${task.status}</div>
             <div class="task-due">${task.dueDate}</div>
-        ;
+        `;
         recentTasksElement.appendChild(taskElement);
     });
 }
 
-/
-  إعداد صفحة المهام.
- /
+// إعداد صفحة المهام
 function setupTasksPage() {
+    // تحميل وعرض المهام
     loadAndDisplayTasks();
-
+    
+    // إضافة مستمع حدث لزر إضافة مهمة
     const addTaskBtn = document.getElementById('addTaskBtn');
     if (addTaskBtn) {
         addTaskBtn.addEventListener('click', showAddTaskModal);
     }
-
+    
+    // إضافة مستمع حدث للبحث
     const searchInput = document.getElementById('taskSearch');
     if (searchInput) {
         searchInput.addEventListener('input', filterTasks);
     }
 }
 
-/
-  تحميل وعرض المهام.
- /
+// تحميل وعرض المهام
 function loadAndDisplayTasks() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const employees = JSON.parse(localStorage.getItem('employees')) || [];
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
+    
     const tasksContainer = document.getElementById('tasksContainer');
     if (!tasksContainer) return;
-
+    
     tasksContainer.innerHTML = '';
-
+    
+    // تصفية المهام بناءً على صلاحيات المستخدم
     let filteredTasks = tasks;
     if (currentUser && !currentUser.permissions.includes('all')) {
-        filteredTasks = tasks.filter(task =>
-            task.assignedTo === currentUser.id ||
+        filteredTasks = tasks.filter(task => 
+            task.assignedTo === currentUser.id || 
             task.assignedBy === currentUser.id
         );
     }
-
+    
+    // عرض المهام
     filteredTasks.forEach(task => {
         const assignedToEmployee = employees.find(emp => emp.id === task.assignedTo);
         const assignedByEmployee = employees.find(emp => emp.id === task.assignedBy);
-
+        
         const taskElement = document.createElement('div');
         taskElement.className = 'task-card';
-        taskElement.innerHTML = 
+        taskElement.innerHTML = `
             <div class="task-header">
                 <h3>${task.title}</h3>
                 <span class="task-priority ${task.priority}">${task.priority}</span>
@@ -276,38 +308,36 @@ function loadAndDisplayTasks() {
                     <i class="fas fa-trash"></i> حذف
                 </button>
             </div>
-        ;
+        `;
         tasksContainer.appendChild(taskElement);
     });
 }
 
-/
-  إعداد صفحة الموظفين.
- /
+// إعداد صفحة الموظفين
 function setupEmployeesPage() {
+    // تحميل وعرض الموظفين
     loadAndDisplayEmployees();
-
+    
+    // إضافة مستمع حدث لزر إضافة موظف
     const addEmployeeBtn = document.getElementById('addEmployeeBtn');
     if (addEmployeeBtn) {
         addEmployeeBtn.addEventListener('click', showAddEmployeeModal);
     }
 }
 
-/
-  تحميل وعرض الموظفين.
- /
+// تحميل وعرض الموظفين
 function loadAndDisplayEmployees() {
     const employees = JSON.parse(localStorage.getItem('employees')) || [];
     const employeesContainer = document.getElementById('employeesContainer');
-
+    
     if (!employeesContainer) return;
-
+    
     employeesContainer.innerHTML = '';
-
+    
     employees.forEach(employee => {
         const employeeElement = document.createElement('div');
         employeeElement.className = 'employee-card';
-        employeeElement.innerHTML = 
+        employeeElement.innerHTML = `
             <div class="employee-avatar">
                 <i class="fas fa-user-circle"></i>
             </div>
@@ -326,57 +356,59 @@ function loadAndDisplayEmployees() {
                     <i class="fas fa-trash"></i>
                 </button>
             </div>
-        ;
+        `;
         employeesContainer.appendChild(employeeElement);
     });
 }
 
-/
-  إعداد صفحة الملف الشخصي.
- /
+// إعداد صفحة الملف الشخصي
 function setupProfilePage() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
+    
     if (!currentUser) {
         window.location.href = 'login.html';
         return;
     }
-
+    
+    // تعبئة بيانات الملف الشخصي
     document.getElementById('profileName').textContent = currentUser.name;
     document.getElementById('profileEmail').textContent = currentUser.email;
     document.getElementById('profilePhone').textContent = currentUser.phone;
     document.getElementById('profileDepartment').textContent = currentUser.department;
     document.getElementById('profileJobTitle').textContent = currentUser.jobTitle;
-
+    
+    // إضافة مستمع حدث لتغيير كلمة المرور
     const changePasswordForm = document.getElementById('changePasswordForm');
     if (changePasswordForm) {
-        changePasswordForm.addEventListener('submit', (e) => {
+        changePasswordForm.addEventListener('submit', function(e) {
             e.preventDefault();
-
+            
             const currentPassword = document.getElementById('currentPassword').value;
             const newPassword = document.getElementById('newPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
-
+            
             if (currentPassword !== currentUser.password) {
                 alert('كلمة المرور الحالية غير صحيحة');
                 return;
             }
-
+            
             if (newPassword !== confirmPassword) {
                 alert('كلمة المرور الجديدة غير متطابقة');
                 return;
             }
-
+            
+            // تحديث كلمة المرور
             const employees = JSON.parse(localStorage.getItem('employees'));
             const employeeIndex = employees.findIndex(emp => emp.id === currentUser.id);
-
+            
             if (employeeIndex !== -1) {
                 employees[employeeIndex].password = newPassword;
                 localStorage.setItem('employees', JSON.stringify(employees));
-
+                
+                // تحديث المستخدم الحالي
                 currentUser.password = newPassword;
                 localStorage.setItem('currentUser', JSON.stringify(currentUser));
-
+                
                 alert('تم تغيير كلمة المرور بنجاح');
                 changePasswordForm.reset();
             }
@@ -384,11 +416,9 @@ function setupProfilePage() {
     }
 }
 
-/
-  عرض نموذج إضافة مهمة.
- /
+// وظائف مساعدة
 function showAddTaskModal() {
-    const modalHTML = 
+    const modalHTML = `
         <div class="modal" id="addTaskModal">
             <div class="modal-content">
                 <div class="modal-header">
@@ -428,19 +458,20 @@ function showAddTaskModal() {
                 </div>
             </div>
         </div>
-    ;
-
+    `;
+    
     document.body.insertAdjacentHTML('beforeend', modalHTML);
-
+    
+    // إضافة مستمعي الأحداث للمودال
     const modal = document.getElementById('addTaskModal');
     const closeBtn = modal.querySelector('.close-modal');
     const form = document.getElementById('newTaskForm');
-
+    
     closeBtn.addEventListener('click', () => modal.remove());
     modal.addEventListener('click', (e) => {
         if (e.target === modal) modal.remove();
     });
-
+    
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         addNewTask();
@@ -448,24 +479,17 @@ function showAddTaskModal() {
     });
 }
 
-/
-  الحصول على خيارات الموظفين لنموذج الإضافة.
-  @returns {string} - سلسلة HTML لخيارات الموظفين.
- /
 function getEmployeesOptions() {
     const employees = JSON.parse(localStorage.getItem('employees')) || [];
-    return employees.map(emp =>
-        <option value="${emp.id}">${emp.name} - ${emp.department}</option>
+    return employees.map(emp => 
+        `<option value="${emp.id}">${emp.name} - ${emp.department}</option>`
     ).join('');
 }
 
-/
-  إضافة مهمة جديدة.
- /
 function addNewTask() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
+    
     const newTask = {
         id: tasks.length > 0 ? Math.max(...tasks.map(t => t.id)) + 1 : 1,
         title: document.getElementById('taskTitle').value,
@@ -477,25 +501,23 @@ function addNewTask() {
         dueDate: document.getElementById('taskDueDate').value,
         createdAt: new Date().toISOString().split('T')[0]
     };
-
+    
     tasks.push(newTask);
     localStorage.setItem('tasks', JSON.stringify(tasks));
-
+    
+    // إعادة تحميل المهام
     loadAndDisplayTasks();
     alert('تم إضافة المهمة بنجاح');
 }
 
-/
-  تصفية المهام بناءً على مصطلح البحث.
- /
 function filterTasks() {
     const searchTerm = document.getElementById('taskSearch').value.toLowerCase();
     const taskCards = document.querySelectorAll('.task-card');
-
+    
     taskCards.forEach(card => {
         const title = card.querySelector('h3').textContent.toLowerCase();
         const description = card.querySelector('p').textContent.toLowerCase();
-
+        
         if (title.includes(searchTerm) || description.includes(searchTerm)) {
             card.style.display = 'block';
         } else {
@@ -504,110 +526,39 @@ function filterTasks() {
     });
 }
 
-/
-  تعديل مهمة.
-  @param {number} taskId - معرف المهمة.
- /
-function editTask(taskId) {
-    alert(تعديل المهمة رقم ${taskId});
+// وظائف عامة
+function logout() {
+    localStorage.removeItem('currentUser');
+    window.location.href = 'login.html';
 }
 
-/
-  حذف مهمة.
-  @param {number} taskId - معرف المهمة.
- /
-function deleteTask(taskId) {
+// تصدير الوظائف للاستخدام في HTML
+window.editTask = function(taskId) {
+    alert(`تعديل المهمة رقم ${taskId}`);
+    // يمكنك إضافة منطق التعديل هنا
+};
+
+window.deleteTask = function(taskId) {
     if (confirm('هل أنت متأكد من حذف هذه المهمة؟')) {
-        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        tasks = tasks.filter(task => task.id !== taskId);
-        localStorage.setItem('tasks', JSON.stringify(tasks));
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        const updatedTasks = tasks.filter(task => task.id !== taskId);
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
         loadAndDisplayTasks();
         alert('تم حذف المهمة بنجاح');
     }
-}
+};
 
-/
-  تعديل موظف.
-  @param {number} employeeId - معرف الموظف.
- /
-function editEmployee(employeeId) {
-    alert(تعديل بيانات الموظف رقم ${employeeId});
-}
+window.editEmployee = function(employeeId) {
+    alert(`تعديل بيانات الموظف رقم ${employeeId}`);
+    // يمكنك إضافة منطق التعديل هنا
+};
 
-/
-  حذف موظف.
-  @param {number} employeeId - معرف الموظف.
- /
-function deleteEmployee(employeeId) {
+window.deleteEmployee = function(employeeId) {
     if (confirm('هل أنت متأكد من حذف هذا الموظف؟')) {
-        let employees = JSON.parse(localStorage.getItem('employees')) || [];
-        employees = employees.filter(emp => emp.id !== employeeId);
-        localStorage.setItem('employees', JSON.stringify(employees));
+        const employees = JSON.parse(localStorage.getItem('employees')) || [];
+        const updatedEmployees = employees.filter(emp => emp.id !== employeeId);
+        localStorage.setItem('employees', JSON.stringify(updatedEmployees));
         loadAndDisplayEmployees();
         alert('تم حذف الموظف بنجاح');
     }
-}
-
-/
-  عرض نموذج إضافة موظف.
- /
-function showAddEmployeeModal() {
-    alert('سيتم عرض نموذج إضافة موظف هنا');
-}
-
-// تحديث ملف app.js لإضافة وظائف الأجندة والمزامنة
-
-// ... (الكود الحالي يبقى كما هو)
-
-/
-  تهيئة وحدة التقويم.
- /
-function initializeCalendarModule() {
-    // إضافة عنصر القائمة الجديد
-    const sidebarMenu = document.querySelector('.sidebar-menu');
-    if (sidebarMenu) {
-        const calendarItem = document.createElement('li');
-        calendarItem.innerHTML = 
-            <a href="calendar.html">
-                <i class="fas fa-calendar-alt"></i> الأجندة
-            </a>
-        ;
-        sidebarMenu.insertBefore(calendarItem, sidebarMenu.children[4]);
-    }
-    
-    // تحديث الروابط في لوحة التحكم
-    const quickActions = document.querySelector('.quick-actions');
-    if (quickActions) {
-        const calendarAction = document.createElement('a');
-        calendarAction.className = 'action-btn';
-        calendarAction.href = 'calendar.html';
-        calendarAction.innerHTML = 
-            <div class="action-icon">
-                <i class="fas fa-calendar-alt"></i>
-            </div>
-            <span>الأجندة</span>
-        ;
-        quickActions.appendChild(calendarAction);
-    }
-}
-
-/
-  تهيئة جميع الوحدات.
- /
-document.addEventListener('DOMContentLoaded', function() {
-    initializeLoginModule();
-    initializeDashboardModule();
-    initializeTasksModule();
-    initializeEmployeesModule();
-    initializeProfileModule();
-    initializeCalendarModule(); // <-- إضافة هذه السطر
-    
-    // التحقق من تسجيل الدخول في كل الصفحات
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (!currentUser && !window.location.pathname.includes('login.html') && !window.location.pathname.includes('index.html')) {
-        window.location.href = 'login.html';
-    }
-    
-    // حفظ آخر زيارة
-    localStorage.setItem('lastLogin', new Date().toISOString());
-});
+};
