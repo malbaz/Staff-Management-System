@@ -1,40 +1,28 @@
-html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مكتب إدارة الطيف الترددي - نظام إدارة المهام</title>
-    <base target="self">
+    <base target="_self">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="images/logo.png">
-
-    <!-- FullCalendar CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
-
-    <!-- FullCalendar JS -->
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-
-    <!-- لغة العربية لـ FullCalendar -->
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/ar.min.js"></script>
 </head>
 <body>
     <!-- شريط التنقل -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <a href="index.html">
-                    <img src="images/logo.png" alt="شعار مكتب إدارة الطيف الترددي" class="logo">
-                    <span>مكتب إدارة الطيف الترددي</span>
-                </a>
+                <img src="images/logo.png" alt="شعار مكتب إدارة الطيف الترددي" class="logo">
+                <span>مكتب إدارة الطيف الترددي</span>
             </div>
             <div class="nav-menu">
                 <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> الرئيسية</a>
                 <a href="login.html" class="nav-link"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
-                <a href="features" class="nav-link"><i class="fas fa-star"></i> المميزات</a>
-                <a href="contact" class="nav-link"><i class="fas fa-phone"></i> اتصل بنا</a>
+                <a href="#features" class="nav-link"><i class="fas fa-star"></i> المميزات</a>
+                <a href="#contact" class="nav-link"><i class="fas fa-phone"></i> اتصل بنا</a>
             </div>
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
@@ -45,19 +33,19 @@ html
     <!-- قسم البطل -->
     <section class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">نظام إدارة المهام والمشاريع</h1>
+            <h1 class="hero-title">نظام إدارة المهام </h1>
             <p class="hero-subtitle">ربط الموظفين، إسناد المهام، متابعة الإنجاز، وأجندة أعمال متكاملة</p>
             <div class="hero-buttons">
                 <a href="login.html" class="btn btn-primary">
                     <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
                 </a>
-                <a href="features" class="btn btn-secondary">
+                <a href="#features" class="btn btn-secondary">
                     <i class="fas fa-info-circle"></i> تعرف على المميزات
                 </a>
             </div>
         </div>
         <div class="hero-image">
-            <img src="https://github.com/malbaz/Staff-Management-System/blob/main/images/2c212286-e3bb-43b9-9dc9-1acde85df336.jpg" alt="فريق العمل المتعاون">
+            <img src="https://picsum.photos/600/400?random=1" alt="فريق العمل المتعاون">
         </div>
     </section>
 
@@ -84,7 +72,7 @@ html
                     <i class="fas fa-chart-line"></i>
                 </div>
                 <h3>متابعة الإنجاز</h3>
-                <p>تقارير وإحصائيات عن أداء الموظفين وتقدم المشاريع</p>
+                <p>تقارير وإحصائيات عن أداء الموظفين وتقدم المهام</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
@@ -143,8 +131,8 @@ html
         <div class="contact-info">
             <div class="contact-item">
                 <i class="fas fa-phone"></i>
-                <h3>الجوال</h3>
-                <p>+966 55 430 0039</p>
+                <h3>الهاتف</h3>
+                <p>+966 11 123 4567</p>
             </div>
             <div class="contact-item">
                 <i class="fas fa-envelope"></i>
@@ -154,7 +142,7 @@ html
             <div class="contact-item">
                 <i class="fas fa-map-marker-alt"></i>
                 <h3>العنوان</h3>
-                <p>الاتصالات والأنظمة الأمنية - مكتب إدارة الطيف الترددي-الرياض - المملكة العربية السعودية</p>
+                <p>الرياض- وزارة الداخلية-الادارة العامة للاتصالات والانظمة الأمنية</p>
             </div>
         </div>
     </section>
@@ -165,30 +153,29 @@ html
             <div class="footer-logo">
                 <img src="images/logo.png" alt="شعار المكتب" class="logo">
                 <h3>مكتب إدارة الطيف الترددي</h3>
-                <p>نظام إدارة المهام والمشاريع</p>
+                <p>نظام إدارة المهام </p>
             </div>
             <div class="footer-links">
                 <h4>روابط سريعة</h4>
                 <a href="index.html">الرئيسية</a>
                 <a href="login.html">تسجيل الدخول</a>
-                <a href="features">المميزات</a>
-                <a href="contact">اتصل بنا</a>
+                <a href="#features">المميزات</a>
+                <a href="#contact">اتصل بنا</a>
             </div>
             <div class="footer-social">
                 <h4>تابعنا</h4>
                 <div class="social-icons">
-                    <a href=""><i class="fab fa-twitter"></i></a>
-                    <a href=""><i class="fab fa-linkedin"></i></a>
-                    <a href=""><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 مكتب إدارة الطيف الترددي- محمد بن سعد الباز. جميع الحقوق محفوظة.</p>
+            <p>© 2024 مكتب إدارة الطيف الترددي. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
 
     <script src="app.js"></script>
 </body>
 </html>
-
