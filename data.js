@@ -69,8 +69,8 @@ const defaultEmployees = [
         username: 'admin',
         password: 'admin123',
         name: 'مدير النظام',
-        email: ' 7mooody2009@gmail.com',
-        phone: '0554300039',
+        email: 'admin@spectrum.gov.sa',
+        phone: '0501234567',
         department: 'الإدارة',
         jobTitle: 'مدير النظام',
         permissions: ['all'],
@@ -78,12 +78,12 @@ const defaultEmployees = [
     },
     {
         id: 2,
-        username: 'waseem',
-        password: 'waseem123',
-        name: 'hzam',
+        username: 'ahmed',
+        password: 'ahmed123',
+        name: 'أحمد محمد',
         email: 'ahmed@spectrum.gov.sa',
         phone: '0507654321',
-        department: 'سكرتارية',
+        department: 'التقنية',
         jobTitle: 'مطور ويب',
         permissions: ['view_tasks', 'create_tasks', 'edit_tasks'],
         joinDate: '2024-01-15'
@@ -137,7 +137,7 @@ function initializeData() {
     }
     
     if (!localStorage.getItem('departments')) {
-        const departments = ['الإدارة', 'سكرتارية', 'شعبة تخطيط الطيف الترددي', 'شعبة عمليات الطيف الترددي', 'شعبة مكتب التواصل لشؤون الطيف الترددي'];
+        const departments = ['الإدارة', 'التقنية', 'المالية', 'المبيعات', 'الدعم الفني', 'التدريب'];
         localStorage.setItem('departments', JSON.stringify(departments));
     }
     
@@ -154,61 +154,3 @@ function initializeData() {
 
 // تصدير الدوال
 window.initializeData = initializeData;
-
-// إضافة بيانات الأحداث الافتراضية
-const defaultCalendarEvents = [
-    {
-        id: 'event-1',
-        title: 'اجتماع إدارة الطيف الترددي',
-        description: 'اجتماع شهري لمناقشة استراتيجيات إدارة الطيف الترددي',
-        start: '2024-03-01T10:00:00',
-        end: '2024-03-01T12:00:00',
-        color: '#1a237e',
-        extendedProps: {
-            type: 'event'
-        }
-    },
-    {
-        id: 'event-2',
-        title: 'ورشة عمل التقنيات اللاسلكية',
-        description: 'ورشة عمل لتدريب الموظفين على أحدث التقنيات اللاسلكية',
-        start: '2024-03-15T09:00:00',
-        end: '2024-03-16T17:00:00',
-        color: '#28a745',
-        extendedProps: {
-            type: 'event'
-        }
-    }
-];
-
-// تحديث دالة initializeData
-function initializeData() {
-    if (!localStorage.getItem('tasks')) {
-        localStorage.setItem('tasks', JSON.stringify(defaultTasks));
-    }
-    
-    if (!localStorage.getItem('employees')) {
-        localStorage.setItem('employees', JSON.stringify(defaultEmployees));
-    }
-    
-    if (!localStorage.getItem('calendarEvents')) {
-        localStorage.setItem('calendarEvents', JSON.stringify(defaultCalendarEvents));
-    }
-    
-    if (!localStorage.getItem('departments')) {
-        const departments = ['الإدارة', 'سكرتارية', 'شعبة تخطيط الطيف الترددي', 'شعبة عمليات الطيف الترددي', 'شعبة مكتب التواصل لشؤون الطيف التردد'];
-        localStorage.setItem('departments', JSON.stringify(departments));
-    }
-    
-    if (!localStorage.getItem('taskStatuses')) {
-        const statuses = ['معلق', 'قيد التنفيذ', 'مكتمل', 'ملغي'];
-        localStorage.setItem('taskStatuses', JSON.stringify(statuses));
-    }
-    
-    if (!localStorage.getItem('taskPriorities')) {
-        const priorities = ['منخفض', 'متوسط', 'عالي'];
-        localStorage.setItem('taskPriorities', JSON.stringify(priorities));
-    }
-}
-
-
